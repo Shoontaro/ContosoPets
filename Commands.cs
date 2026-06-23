@@ -16,27 +16,50 @@ namespace ContosoPets
         this.ourAnimals = ourAnimals;
         }
 
-        public void Comm() 
+        public void Comm()
         {
-            string command = View.ReadLine();
+            while (true)
+            {
+                Console.WriteLine();
+                string command = View.ReadLine();
 
-            Command list = new("list");
-            list.SetAction(parseResult => {
-                BL.ListAnimals(ourAnimals);
-            });
+                Argument<Types> type = new("type");
+                Argument<int> id = new("id");
 
-            Command add = new("add");
-            add.SetAction(parseResult => {
-                BL.AddAnimal(new Animal(Types.cat, 1, "ok", "good girl", "Tosya"), ourAnimals);
-            });
+                Option<string> name = new(name: "--name", aliases: "-n");
+                Option<int> age = new(name: "--age", aliases: "-a");
+                Option<string> condition = new(name: "--condition", aliases: "-c");
+                Option<string> personality = new(name: "--personality", aliases: "-p");
 
-            RootCommand rootCommand = new("Todo проект с использованием System.CommandLine")
-            { 
+                Command list = new("list");
+                list.SetAction(parseResult =>
+                {
+                    BL.ListAnimals(ourAnimals);
+                });
+
+                Command add = new("add") {
+            type,
+            name,
+            age,
+            condition,
+            personality
+            };
+                add.SetAction(parseResult =>
+                {
+                    BL.AddAnimal(new Animal(parseResult.GetValue(type), parseResult.GetValue(age),
+                        parseResult.GetValue(condition) ?? "unknown",
+                        parseResult.GetValue(personality) ?? "unknown",
+                        parseResult.GetValue(name) ?? "Noname"), ourAnimals);
+                });
+
+                RootCommand rootCommand = new("Todo проект с использованием System.CommandLine")
+            {
             list,
             add
             };
 
-            rootCommand.Parse(command).Invoke();
+                rootCommand.Parse(command).Invoke();
+            }
         }
     }
 }

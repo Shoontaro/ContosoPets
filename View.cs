@@ -16,10 +16,19 @@ namespace ContosoPets
             Console.WriteLine(text);
         }
 
+        public static void Correct(string text) {
+            AnsiConsole.MarkupLine($"[green]✓ {text}[/]\n");
+        }
+
         public static string ReadLine() {
             return Console.ReadLine()??string.Empty;
         }
 
+        //public static void MooltySelector<T>(List<T> data) {
+
+        //    var name = AnsiConsole.Ask<string>("What's your [green]name[/]?");
+
+        //}
         public static void ViewTable<T>(List<T> data)
         {
             // 1. Создаем объект таблицы

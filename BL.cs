@@ -16,12 +16,13 @@ namespace ContosoPets
             }
         }
 
-        public static void AddAnimal(Animal animal, List<Animal> data) { //сделать генериком
+        public static void AddAnimal(Animal animal, List<Animal> data) 
+        { //сделать генериком
             if (animal is Animal) { 
                 animal.Id = data.Count;
                 data.Add(animal);
 
-                View.WriteLine($"{animal.Name} added");
+                View.Correct($"{animal.Name} added");
             }
         }
     }
