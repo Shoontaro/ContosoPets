@@ -25,8 +25,8 @@ namespace ContosoPets
             // 1. Создаем объект таблицы
             var table = new Table()
                 .Border(TableBorder.Rounded) // Закругленные границы
-                .Title("[yellow]СПИСОК ЖИВОТНЫХ[/]") // Заголовок таблицы
-                .Caption($"[grey]Всего записей: {data.Count}[/]"); // Подпись внизу
+                .Title("[yellow]Pet list[/]") // Заголовок таблицы
+                .Caption($"[grey]Count: {data.Count}[/]"); // Подпись внизу
             
             Type type = typeof(T);
 

@@ -8,6 +8,6 @@ internal class Program
 
         List<Animal> ourAnimals = Animal.Seeds();
 
-        Commands.Comm();
+        new Commands(ourAnimals).Comm();
     }
 }
