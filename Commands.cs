@@ -37,6 +37,22 @@ namespace ContosoPets
                     BL.ListAnimals(ourAnimals);
                 });
 
+                Command update = new("update") { 
+                id, 
+                name, 
+                age,
+                condition,
+                personality
+                };
+                update.SetAction(parseResult => {
+                    BL.UpdateAnimal(parseResult.GetValue(id),
+                        new Animal(parseResult.GetValue(type), parseResult.GetValue(age),
+                        parseResult.GetValue(condition) ?? "unknown",
+                        parseResult.GetValue(personality) ?? "unknown",
+                        parseResult.GetValue(name) ?? "Noname"),
+                        ourAnimals);
+                });
+
                 Command add = new("add") {
             type,
             name,

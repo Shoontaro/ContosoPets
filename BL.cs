@@ -25,5 +25,17 @@ namespace ContosoPets
                 View.Correct($"{animal.Name} added");
             }
         }
+
+        public static void UpdateAnimal(int id, Animal animal, List<Animal> data) {
+            if (animal is Animal && data.Any(v => v.Id == id))
+            {
+                Animal oldOne = data.Find(v => v.Id == id);
+
+               
+            }
+            else {
+                View.WriteLine("Error");
+            }
+        }
     }
 }
