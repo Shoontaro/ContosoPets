@@ -45,6 +45,12 @@ namespace ContosoPets
                 personality
                 };
                 update.SetAction(parseResult => {
+
+                    if (parseResult.Tokens.Any(v => v.Value == "--age" || v.Value == "-a"))
+                    {
+                        Console.WriteLine($"change age to {parseResult.GetValue(age)}");
+                        BL.UpdateAge(parseResult.GetValue(id), parseResult.GetValue(age), ourAnimals);
+                    }
                     BL.UpdateAnimal(parseResult.GetValue(id),
                         new Animal(parseResult.GetValue(type), parseResult.GetValue(age),
                         parseResult.GetValue(condition) ?? "unknown",
@@ -71,7 +77,8 @@ namespace ContosoPets
                 RootCommand rootCommand = new("Todo проект с использованием System.CommandLine")
             {
             list,
-            add
+            add,
+            update
             };
 
                 rootCommand.Parse(command).Invoke();
