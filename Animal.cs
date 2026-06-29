@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.CommandLine;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ContosoPets
 {
@@ -48,6 +50,27 @@ namespace ContosoPets
             PhysCondition = physCondition;
             Personality = personality;
             Name = name;
+        }
+
+        public void ChangeAge(int age) 
+        {
+            Console.WriteLine($"change age to {age}");
+            this.Age = age;
+        }
+        public void ChangeCondition(string condition) 
+        {
+            Console.WriteLine($"change condition to {condition}");
+            this.PhysCondition = condition;
+        }
+        public void ChangePersonality(string personality) 
+        {
+            Console.WriteLine($"change personality to {personality}");
+            this.Personality = personality;
+        }
+
+        public void ChangeName(string name) {
+            Console.WriteLine($"change name to {name}");
+            this.Name = name;
         }
 
         public static List<Animal> Seeds()

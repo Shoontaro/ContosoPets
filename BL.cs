@@ -38,16 +38,30 @@ namespace ContosoPets
                 View.WriteLine("wrong id");
             }
         }
-        public static void UpdateAnimal(int id, Animal animal, List<Animal> data) {
-            if (animal is Animal && data.Any(v => v.Id == id))
-            {
-                Animal oldOne = data.Find(v => v.Id == id);
 
-                oldOne.Personality = string.IsNullOrEmpty(animal.Personality) ? oldOne.Personality : animal.Personality;
+        public static void UpdateName(int id, string name, List<Animal> data) {
+            if (data.Any(v => v.Id == id))
+            {
+                data.Find(v => v.Id == id).Name = name;
             }
-            else {
-                View.WriteLine("Error");
+            else
+            {
+                View.WriteLine("wrong id");
             }
         }
+
+
+        //public static void UpdateAnimal(int id, Animal animal, List<Animal> data) {
+        //    if (animal is Animal && data.Any(v => v.Id == id))
+        //    {
+        //        Animal oldOne = data.Find(v => v.Id == id);
+
+        //        oldOne.Personality = string.IsNullOrEmpty(animal.Personality) ? oldOne.Personality : animal.Personality;
+                
+        //    }
+        //    else {
+        //        View.WriteLine("Error");
+        //    }
+        //}
     }
 }

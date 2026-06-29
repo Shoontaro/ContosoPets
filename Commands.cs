@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.CommandLine;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.CommandLine;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ContosoPets
 {
@@ -44,19 +45,31 @@ namespace ContosoPets
                 condition,
                 personality
                 };
+                update.Aliases.Add("change");
                 update.SetAction(parseResult => {
-
-                    if (parseResult.Tokens.Any(v => v.Value == "--age" || v.Value == "-a"))
+                    int animalId = parseResult.GetValue(id);
+                    if (ourAnimals.Any(v => v.Id == animalId))
                     {
-                        Console.WriteLine($"change age to {parseResult.GetValue(age)}");
-                        BL.UpdateAge(parseResult.GetValue(id), parseResult.GetValue(age), ourAnimals);
+                        Animal animal = ourAnimals?.Find(v => v.Id == animalId);
+
+                        if (parseResult.Tokens.Any(v => v.Value == "--age" || v.Value == "-a"))
+                        {
+                            animal.ChangeAge(parseResult.GetValue(age));
+                        }
+                        if (parseResult.Tokens.Any(v => v.Value == "--name" || v.Value == "-n"))
+                        {
+                            animal.ChangeName(parseResult.GetValue(name));
+                        }
+                        if (parseResult.Tokens.Any(v => v.Value == "--condition" || v.Value == "-c"))
+                        {
+                            animal.ChangeCondition(parseResult.GetValue(condition));
+                        }
+                        if (parseResult.Tokens.Any(v => v.Value == "--personality" || v.Value == "-p"))
+                        {
+                            animal.ChangePersonality(parseResult.GetValue(personality));
+                        }
                     }
-                    BL.UpdateAnimal(parseResult.GetValue(id),
-                        new Animal(parseResult.GetValue(type), parseResult.GetValue(age),
-                        parseResult.GetValue(condition) ?? "unknown",
-                        parseResult.GetValue(personality) ?? "unknown",
-                        parseResult.GetValue(name) ?? "Noname"),
-                        ourAnimals);
+
                 });
 
                 Command add = new("add") {
