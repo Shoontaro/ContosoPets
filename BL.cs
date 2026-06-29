@@ -16,6 +16,13 @@ namespace ContosoPets
                 View.ViewTable(animals);
             }
         }
+        public static void ListAnimals(List<Animal> animals, Types types) //сделать генериком
+        {
+            if (animals is List<Animal>)
+            {
+                View.ViewTable(animals.Where(v=>v.AnimalType==types).ToList());
+            }
+        }
 
         public static void AddAnimal(Animal animal, List<Animal> data) 
         { //сделать генериком

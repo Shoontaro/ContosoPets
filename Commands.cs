@@ -31,11 +31,23 @@ namespace ContosoPets
                 Option<int> age = new(name: "--age", aliases: "-a");
                 Option<string> condition = new(name: "--condition", aliases: "-c");
                 Option<string> personality = new(name: "--personality", aliases: "-p");
+                Option<Types> types = new(name: "--type", aliases: "-t");
 
-                Command list = new("list");
+                Command list = new("list")
+                { 
+                    types   
+                };
                 list.SetAction(parseResult =>
                 {
-                    BL.ListAnimals(ourAnimals);
+                    if (parseResult.Tokens.Any(v => v.Value == "--type" || v.Value == "-t"))
+                    {
+                        BL.ListAnimals(ourAnimals, parseResult.GetValue(type));
+                    }
+                    else 
+                    {
+                        BL.ListAnimals(ourAnimals);
+                    }
+                   
                 });
 
                 Command update = new("update") { 
