@@ -9,6 +9,18 @@ namespace ContosoPets
 {
     public class BL
     {
+
+        public static void Delete(int id, List<Animal> list) {
+            if (list.Any(v => v.Id == id))
+            {
+                list.Remove(list.Find(v => v.Id == id));
+                Console.WriteLine($"{id} was delete");
+                ListAnimals(list);
+            }
+            else {
+                Console.WriteLine("Wrong id");
+            }
+        }
         public static void ListAnimals(List<Animal> animals) //сделать генериком
         {
             if (animals is List<Animal>)

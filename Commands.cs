@@ -33,6 +33,13 @@ namespace ContosoPets
                 Option<string> personality = new(name: "--personality", aliases: "-p");
                 Option<Types> types = new(name: "--type", aliases: "-t");
 
+                Command del = new("del") { 
+                id
+                };
+                del.SetAction(parseResult => {
+                    BL.Delete(parseResult.GetValue(id), ourAnimals);
+                });
+
                 Command list = new("list")
                 { 
                     types   
@@ -103,7 +110,8 @@ namespace ContosoPets
             {
             list,
             add,
-            update
+            update,
+            del
             };
 
                 rootCommand.Parse(command).Invoke();
