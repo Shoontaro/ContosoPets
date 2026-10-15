@@ -9,7 +9,6 @@ namespace ContosoPets
 {
     public class BL
     {
-
         public static void Delete(int id, List<Animal> list) {
             if (list.Any(v => v.Id == id))
             {
@@ -17,7 +16,8 @@ namespace ContosoPets
                 Console.WriteLine($"{id} was delete");
                 ListAnimals(list);
             }
-            else {
+            else 
+            {
                 Console.WriteLine("Wrong id");
             }
         }

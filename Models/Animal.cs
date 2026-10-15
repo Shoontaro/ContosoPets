@@ -9,7 +9,6 @@ using System.Xml.Linq;
 
 namespace ContosoPets
 {
-
     public enum Types { 
     cat,
     dog
@@ -33,6 +32,7 @@ namespace ContosoPets
         [DisplayName("PERSONALITY")]
         public string Personality { get; set; } = string.Empty;
         
+        public Animal() { }
         public Animal(Types type, int age, string phys, string personality, string name) 
         {
             AnimalType = type;

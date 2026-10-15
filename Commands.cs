@@ -14,7 +14,7 @@ namespace ContosoPets
 
         public Commands(List<Animal> ourAnimals)
         { 
-        this.ourAnimals = ourAnimals;
+            this.ourAnimals = ourAnimals;
         }
 
         public void Comm()
@@ -54,7 +54,6 @@ namespace ContosoPets
                     {
                         BL.ListAnimals(ourAnimals);
                     }
-                   
                 });
 
                 Command update = new("update") { 
@@ -69,7 +68,7 @@ namespace ContosoPets
                     int animalId = parseResult.GetValue(id);
                     if (ourAnimals.Any(v => v.Id == animalId))
                     {
-                        Animal animal = ourAnimals?.Find(v => v.Id == animalId);
+                        Animal animal = ourAnimals?.Find(v => v.Id == animalId)??new Animal();
 
                         if (parseResult.Tokens.Any(v => v.Value == "--age" || v.Value == "-a"))
                         {
@@ -88,7 +87,6 @@ namespace ContosoPets
                             animal.ChangePersonality(parseResult.GetValue(personality));
                         }
                     }
-
                 });
 
                 Command add = new("add") {
