@@ -11,6 +11,13 @@ namespace ContosoPets.Services
 {
     public class PetService : IProcessor
     {
+
+        public IProvider Provider { get; set; }
+        public PetService(IProvider provider)
+        { 
+            Provider = provider;
+        }
+
         public async Task AddAnimal(Animal animals)
         {
             throw new NotImplementedException();
@@ -18,17 +25,19 @@ namespace ContosoPets.Services
 
         public async Task<Animal> GetAnimal(int id)
         {
-            throw new NotImplementedException();
+            List<Animal> animals = await Provider.LoadAnimalsAsync();
+            Animal animal = animals.Find(x => x.Id == id)??new Animal();
+            return animal;
         }
 
         public async Task<List<Animal>> GetAnimals()
         {
-            throw new NotImplementedException();
+            return await Provider.LoadAnimalsAsync();
         }
 
         public async Task RemoveAnimal(Animal animals)
         {
-            throw new NotImplementedException();
+            List<Animal> animals = await Provider.LoadAnimalsAsync();
         }
     }
 }

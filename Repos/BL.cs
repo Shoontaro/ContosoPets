@@ -21,14 +21,14 @@ namespace ContosoPets
                 Console.WriteLine("Wrong id");
             }
         }
-        public static void ListAnimals(List<Animal> animals) //сделать генериком
+        public static void ListAnimals(List<Animal> animals) 
         {
             if (animals is List<Animal>)
             {
                 View.ViewTable(animals);
             }
         }
-        public static void ListAnimals(List<Animal> animals, Types types) //сделать генериком
+        public static void ListAnimals(List<Animal> animals, Types types)
         {
             if (animals is List<Animal>)
             {

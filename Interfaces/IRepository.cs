@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ContosoPets
 {
-    interface IProvider
+    public interface IProvider
     {
-        public Task<List<Animal>> LoadTasksAsync();
+        public Task<List<Animal>> LoadAnimalsAsync();
 
-        public Task SaveTasksAsync(List<Animal> todos);
+        public Task SaveAnimalsAsync(List<Animal> todos);
 
     }
 }

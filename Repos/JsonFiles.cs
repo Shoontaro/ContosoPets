@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ContosoPets.Repos
 {
-    public class JsonFiles 
+    public class JsonFiles : IProvider
     {
         private readonly string FilePath = Path.Combine(Directory.GetCurrentDirectory(), "pets.json");
 
@@ -20,7 +20,7 @@ namespace ContosoPets.Repos
         };
 
 
-        public async Task<List<Animal>> LoadTasksAsync()
+        public async Task<List<Animal>> LoadAnimalsAsync()
         {
             if (!File.Exists(FilePath)) return new List<Animal>();
 
@@ -31,7 +31,7 @@ namespace ContosoPets.Repos
             return result ?? new List<Animal>();
     }
 
-        public async Task SaveTasksAsync(List<Animal> todos)
+        public async Task SaveAnimalsAsync(List<Animal> todos)
         {
             using FileStream createStream = File.Create(FilePath);
 
