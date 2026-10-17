@@ -12,5 +12,6 @@ namespace ContosoPets.Interfaces
         Task<Animal> GetAnimal(int id);
         Task RemoveAnimal(Animal animals);
         Task<List<Animal>> GetAnimals();
+
     }
 }

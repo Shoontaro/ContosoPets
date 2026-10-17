@@ -18,15 +18,33 @@ namespace ContosoPets.Services
             Provider = provider;
         }
 
-        public async Task AddAnimal(Animal animals)
+        public async Task AddAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+
+            if (animal == null) {
+                Console.WriteLine("Не введено животное");
+                return;
+            }
+
+            List<Animal> animals = await Provider.LoadAnimalsAsync();
+            animal.Id = animals.Count > 0 ? animals.Last().Id + 1 : 1;
+
+            animals.Add(animal);
+
+            await Provider.SaveAnimalsAsync(animals);
+            
+            Console.WriteLine($"Животное успешно добавлено! Id {animal.Id}");
         }
 
         public async Task<Animal> GetAnimal(int id)
         {
             List<Animal> animals = await Provider.LoadAnimalsAsync();
-            Animal animal = animals.Find(x => x.Id == id)??new Animal();
+                            
+            Animal? animal = animals.Find(x => x.Id == id);
+            if (animal == null) {
+                Console.WriteLine("Нет такого зверя");
+                return new Animal();
+            }
             return animal;
         }
 
@@ -35,9 +53,19 @@ namespace ContosoPets.Services
             return await Provider.LoadAnimalsAsync();
         }
 
-        public async Task RemoveAnimal(Animal animals)
+        public async Task RemoveAnimal(Animal animal)
         {
             List<Animal> animals = await Provider.LoadAnimalsAsync();
+
+            if (!animals.Contains(animal))
+            {
+                Console.WriteLine("Нет такого зверя");
+                return;
+            }
+
+            animals.Remove(animal);
+            await Provider.SaveAnimalsAsync(animals);
+            Console.WriteLine("Животное удалено");
         }
     }
 }
